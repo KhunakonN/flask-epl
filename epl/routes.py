@@ -52,7 +52,7 @@ def info_club(id):
                          title='Info Club Page',
                          club=club)
 
-@app.route('/clubs/<int:id>/update', methods=['GET','POST'])
+@app.route('/clubs/<int:id>/update', methods=['GET', 'POST'])
 def update_club(id):
   club = db.session.get(Club, id)
   if request.method == 'POST':
@@ -65,11 +65,13 @@ def update_club(id):
     club.stadium = stadium
     club.year = year
     club.logo = logo
+
     db.session.add(club)
     db.session.commit()
 
     flash('update club successfully', 'success')
     return redirect(url_for('all_clubs'))
+  
   return render_template('clubs/update_club.html',
                          title='Update Club Page',
                          club=club)
@@ -94,7 +96,7 @@ def new_player():
     goals = int(request.form['goals'])
     squad_no = int(request.form['squad_no'])
     img = request.form['img']
-    club_id = int(request.form['club_id'])
+    club_id = request.form['club_id']
     
     player = Player(name=name, 
                     position=position, 
@@ -121,5 +123,5 @@ def search_player():
     players = db.session.scalars(query).all()
 
     return render_template('players/search_player.html',
-                           title='Search Players Page',
+                           title='Search Player Page',
                            players=players)
