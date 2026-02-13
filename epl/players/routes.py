@@ -58,7 +58,7 @@ def search_player():
 def info_player(id):
   player = db.session.get(Player, id)
 
-  return render_template('player/info_player.html',
+  return render_template('players/info_player.html',
                          title='Info Player Page',
                          player=player)
 
