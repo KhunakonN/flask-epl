@@ -15,7 +15,7 @@
       </div>
       <div class="mb-3">
         <label for="position" class="form-label">Select Position</label>
-        <select name="position" class="form-select" aria-readonly="true">
+        <select name="position" id="position" class="form-select" aria-readonly="true" onchange="toggleCleanSheets()">
           <option value="Goalkeeper" {% if player.position == 'Goalkeeper' %}
             selected
           {% endif %}
@@ -35,10 +35,14 @@
         <label for="nationality" class="form-label">Nationality</label>
         <input value="{{player.nationality}}" readonly name="nationality" type="text" class="form-control" id="nationality" required>
       </div>
-      <div class="mb-3">
+      <div class="mb-3" id="goals_div">
         <label for="goals" class="form-label">Goals</label>
         <input value="{{player.goals}}" name="goals" type="number" class="form-control" id="goals" required>
       </div>
+      <div class="mb-3" id="clean_sheets_div" style="display: none;">
+        <label for="clean_sheets" class="form-label">Clean Sheets</label>
+       <input value="{{player.clean_sheets or ''}}" name="clean_sheets" type="number" class="form-control" id="clean_sheets">
+     </div>
       <div class="mb-3">
         <label for="squad_no" class="form-label">Squad No</label>
         <input value="{{player.squad_no}}" name="squad_no" type="number" class="form-control" id="squad_no" required>
@@ -65,4 +69,18 @@
       </button>
     </form>
   </div>
+  <script>
+  function toggleCleanSheets() {
+    var position = document.getElementById('position').value;
+    var div = document.getElementById('clean_sheets_div');
+    var input = document.getElementById('clean_sheets');
+
+    if (position === 'Goalkeeper') {
+      div.style.display = 'block';
+    } else {
+      div.style.display = 'none';
+    }
+  }
+  window.onload = toggleCleanSheets;
+</script>
 {% endblock %}

@@ -36,12 +36,21 @@
               <div class="col"><h2>Nationality</h2></div>
               <div class="col"><h2 class="text-secondary float-end">{{player.nationality}}</h2></div>
             </div>
+           {% if player.position != 'Goalkeeper' %}
             <hr>
             <div class="row">
               <div class="col"><h2>Goals</h2></div>
               <div class="col"><h2 class="text-secondary float-end">{{player.goals}}</h2></div>
             </div>
+            {% endif %}
+
+            {% if player.position == 'Goalkeeper' %}
             <hr>
+            <div class="row">
+              <div class="col"><h2>Clean Sheets</h2></div>
+              <div class="col"><h2 class="text-secondary float-end">{{player.clean_sheets or 0}}</h2></div>
+            </div>
+            {% endif %}
             <hr>
             <div class="row">
               <div class="col"><h2>Squad_no</h2></div>

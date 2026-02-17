@@ -25,6 +25,7 @@ class Player(db.Model):
     squad_no: Mapped[int] = mapped_column(Integer, nullable=True)
     img: Mapped[str] = mapped_column(String(256), nullable=False)
     club_id: Mapped[int] = mapped_column(Integer, ForeignKey(Club.id))
+    clean_sheets: Mapped[int] = mapped_column(Integer, nullable=True)
 
     club: Mapped[Club] = relationship(back_populates='players')
     def __repr__(self):
